@@ -46,7 +46,8 @@ class UpcomingEvents
   end
 
   def featured_event_ids
-    Tag.find_by(name: "featured-events").topics.ids
+    tag = Tag.find_by(name: "featured-events")
+    tag ? tag.topics.ids : []
   end
 
   def is_featured?(id)
