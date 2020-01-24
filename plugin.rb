@@ -1,6 +1,6 @@
 # name: discourse-upcoming-events
 # about: Displays upcoming and featured events.
-# version: 0.3
+# version: 0.3.1
 # authors: David Newkerk
 # dependencies: discourse-events, discourse-layouts
 
