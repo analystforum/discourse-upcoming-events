@@ -6,15 +6,3 @@ plugins:
   upcoming_events_limit:
     default: 5
     client: true
-  
-  upcoming_events_featured_cfa:
-    default: ""
-    client: true
-
-  upcoming_events_featured_caia:
-    default: ""
-    client: true
-
-  upcoming_events_featured_frm:
-    default: ""
-    client: true

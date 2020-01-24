@@ -2,6 +2,3 @@ en:
   site_settings:
     upcoming_events_enabled: "Enable upcoming events"
     upcoming_events_limit: "Number of upcoming events to show"
-    upcoming_events_featured_cfa: "IDs of featured CFA Events (e.g. 1|2|3)"
-    upcoming_events_featured_caia: "IDs of featured CAIA Events (e.g. 1|2|3)"
-    upcoming_events_featured_frm: "IDs of featured FRM Events (e.g. 1|2|3)"

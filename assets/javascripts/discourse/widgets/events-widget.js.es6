@@ -75,7 +75,7 @@ export default createWidget("events-widget", {
               h("span.day", moment(event.date).format("DD")),
             ]
           ),
-          h("a.title", { href: `/t/${event.slug}/${event.id}` }, event.title)
+          h("a.title", { href: Discourse.getURL(`/t/${event.slug}/${event.id}`) }, event.title)
         ]
       );
     });
