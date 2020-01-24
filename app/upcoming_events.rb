@@ -46,7 +46,7 @@ class UpcomingEvents
   end
 
   def featured_event_ids
-    tag = Tag.find_by_name("featured-events")
+    tag = Tag.find_by_name("featured-event")
     tag ? tag.topics.ids : []
   end
 
