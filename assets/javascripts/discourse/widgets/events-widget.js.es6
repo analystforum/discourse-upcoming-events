@@ -6,7 +6,15 @@ import { h } from "virtual-dom";
 import { ajax } from "discourse/lib/ajax";
 import { getParentCategoryId } from "../../lib/get-category";
 
-export default createWidget("events-widget", {
+let layouts;
+try {
+  layouts = requirejs('discourse/plugins/discourse-layouts/discourse/lib/layouts');
+} catch(error) {
+  layouts = { createLayoutsWidget: createWidget };
+  console.error(error);
+}
+
+export default layouts.createLayoutsWidget('events-widget', {
   tagName: "div.events-widget.widget-container.no-border",
   buildKey: () => "events-widget",
 
