@@ -5,11 +5,12 @@ import { createWidget } from "discourse/widgets/widget";
 import { h } from "virtual-dom";
 import { ajax } from "discourse/lib/ajax";
 import { getParentCategoryId } from "../../lib/get-category";
+import getUrl from "discourse-common/lib/get-url";
 
 let layouts;
 try {
   layouts = requirejs('discourse/plugins/discourse-layouts/discourse/lib/layouts');
-} catch(error) {
+} catch (error) {
   layouts = { createLayoutsWidget: createWidget };
   console.error(error);
 }
@@ -31,7 +32,7 @@ export default layouts.createLayoutsWidget('events-widget', {
     this.appEvents.on("page:changed", this, "_fetchDataThrottled");
   },
 
-  _fetchDataThrottled: _.throttle(function() {
+  _fetchDataThrottled: _.throttle(function () {
     this._fetchData();
   }, 2000, { "trailing": false }),
 
@@ -65,7 +66,7 @@ export default layouts.createLayoutsWidget('events-widget', {
               h("span.day", moment(event.date).format("DD")),
             ]
           ),
-          h("a.title", { href: Discourse.getURL(`/t/${event.slug}/${event.id}`) }, event.title)
+          h("a.title", { href: getUrl(`/t/${event.slug}/${event.id}`) }, event.title)
         ]
       );
     });
