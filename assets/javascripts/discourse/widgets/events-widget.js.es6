@@ -4,8 +4,10 @@
 import { createWidget } from "discourse/widgets/widget";
 import { h } from "virtual-dom";
 import { ajax } from "discourse/lib/ajax";
-import { getParentCategoryId } from "../../lib/get-category";
 import getUrl from "discourse-common/lib/get-url";
+import { throttle } from "@ember/runloop";
+import { isEmpty } from "@ember/utils";
+import { getParentCategoryId } from "../../lib/get-category";
 
 let layouts;
 try {
@@ -28,13 +30,17 @@ export default layouts.createLayoutsWidget('events-widget', {
   },
 
   init() {
-    this.appEvents.off("page:changed", this, "_fetchDataThrottled");
-    this.appEvents.on("page:changed", this, "_fetchDataThrottled");
+    this.appEvents.off("page:changed", this, "fetchData");
+    this.appEvents.on("page:changed", this, "fetchData");
   },
 
-  _fetchDataThrottled: _.throttle(function () {
-    this._fetchData();
-  }, 2000, { "trailing": false }),
+  fetchData() {
+    throttle(
+      this,
+      this._fetchData,
+      2000
+    );
+  },
 
   _fetchData() {
     const { state } = this;
@@ -76,7 +82,7 @@ export default layouts.createLayoutsWidget('events-widget', {
     const result = [];
     if (state.loaded) {
       // Featured Events
-      if (state.events && !_.isEmpty(state.events.featured)) {
+      if (state.events && !isEmpty(state.events.featured)) {
         result.push(
           h("div.events",
             [
@@ -87,7 +93,7 @@ export default layouts.createLayoutsWidget('events-widget', {
         );
       }
       // Upcoming Events
-      if (state.events && !_.isEmpty(state.events.upcoming)) {
+      if (state.events && !isEmpty(state.events.upcoming)) {
         result.push(
           h("div.events",
             [
